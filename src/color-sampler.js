@@ -28,6 +28,13 @@
     this.canvas.on('mousemove', this.onMousemove.bind(this));
     this.canvas.on('mouseout', this.onMouseout.bind(this));
     this.canvas.on('click', this.onClick.bind(this));
+    
+    function touchstart(event) { drawstart(event.touches[0]) }
+		function touchmove(event) { drawmove(event.touches[0]); event.preventDefault(); }
+		function touchend(event) { drawend(event.changedTouches[0]) }
+		this.canvas.addEventListener('touchstart', touchstart, false);
+		this.canvas.addEventListener('touchmove', touchmove, false);
+		this.canvas.addEventListener('touchend', touchend, false);
   }
 
   Sampler.prototype.resize = function () {
